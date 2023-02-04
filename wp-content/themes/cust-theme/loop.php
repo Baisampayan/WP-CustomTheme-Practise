@@ -6,7 +6,8 @@
     }
     /** Putting Pagination */
     the_posts_pagination( );
-    do_action( '_themename_after_pagination' );
+    // For Inserting any function
+    // do_action( '_themename_after_pagination' );
 } else { ?>
 <!-- <p>Sorry, no post available!!!</p> -->
 

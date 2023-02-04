@@ -1,9 +1,16 @@
 <?php
 
 function _themename_customize_register($wp_customize) {
+    // Using default Text Sanitization
+    // $wp_customize -> add_setting('_themename_site_info', array(
+    //     'default' => '',
+    //     'sanitize_callback' => 'sanitize_text_field'
+    // ));
+
+    // Using default Custom Sanitization (Text + href)
     $wp_customize -> add_setting('_themename_site_info', array(
         'default' => '',
-        'sanitize_callback' => 'sanitize_text_field'
+        'sanitize_callback' => '_themename_sanitize_site_info'
     ));
 
     // Adding the option under the Site Title & Tagline
@@ -28,3 +35,12 @@ function _themename_customize_register($wp_customize) {
     ));
 }
 add_action( 'customize_register', '_themename_customize_register' );
+
+// Creating Custom Sanitize Function for Footer SiteInfo with <a href>
+function _themename_sanitize_site_info($input) {
+    $allowed = array('a' => array(
+        'href' => array(),
+        'title' => array()
+    ));
+    return wp_kses( $input, $allowed );
+}
