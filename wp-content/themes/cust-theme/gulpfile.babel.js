@@ -34,7 +34,7 @@ const paths = {
         dest: 'dist/assets'
     },
     package: {
-        src: ['**/*', '!node_modules{,/**}', '!node_modules/**/*', '!src{,/**}', '!.babelrc', '!gulpfile.babel.js', '!npm-shrinkwrap.json', '!package-lock.json', '!package.json', '!theme-packaged{,/**}' ],
+        src: ['**/*', '!node_modules{,/**}', '!node_modules/**/*', '!src{,/**}', '!.babelrc', '!gulpfile.babel.js', '!npm-shrinkwrap.json', '!package-lock.json', '!package.json', '!theme-packaged{,/**}',  ],
         dist: 'theme-packaged'
     },
     themeFonts: {
