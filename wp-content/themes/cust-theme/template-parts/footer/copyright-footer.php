@@ -11,7 +11,8 @@ $site_info = get_theme_mod( '_themename_site_info', '' );
                 <?php 
                     $allowed = array('a' => array(
                         'href' => array(),
-                        'title' => array()
+                        'title' => array(),
+                        'style' => array()
                     ));
                     echo wp_kses( $site_info, $allowed ); 
                 ?>

@@ -40,7 +40,8 @@ add_action( 'customize_register', '_themename_customize_register' );
 function _themename_sanitize_site_info($input) {
     $allowed = array('a' => array(
         'href' => array(),
-        'title' => array()
+        'title' => array(),
+        'style' => array()
     ));
     return wp_kses( $input, $allowed );
 }
