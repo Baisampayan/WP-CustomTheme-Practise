@@ -10,7 +10,8 @@ function _themename_customize_register($wp_customize) {
     // Using default Custom Sanitization (Text + href)
     $wp_customize -> add_setting('_themename_site_info', array(
         'default' => '',
-        'sanitize_callback' => '_themename_sanitize_site_info'
+        'sanitize_callback' => '_themename_sanitize_site_info',
+        'transport' => 'postMessage'
     ));
 
     // Adding the option under the Site Title & Tagline
