@@ -19,12 +19,13 @@ function _themename_customize_register($wp_customize) {
         }
     ));
 
-    // Selective Refresh with Ajax for Footer
+    // Selective Refresh with Ajax for Footer Option
     $wp_customize -> selective_refresh -> add_partial('_themename_footer_partial', array(
-        'setting' => array('_themename_site_info'),
-        'selector' => 'c-site-info',
-        'container_inclusive' => true,
+        'setting' => array('_themename_site_info', '_themename_footer_option'),
+        'selector' => '#footer',
+        'container_inclusive' => false,
         'render_callback' => function() {
+            get_template_part( 'template-parts/footer/footer-widgets' );
             get_template_part( 'template-parts/footer/copyright-footer' );
         }
     ));
@@ -54,7 +55,24 @@ function _themename_customize_register($wp_customize) {
     $wp_customize -> add_control('_themename_site_info', array(
         'type' => 'textarea',
         'label' => esc_html__( 'Footer Site Info', '_themename' ),
-        'section' => '_themename_footer_option',
+        'section' => '_themename_footer_option'
+    ));
+
+    // Creating Footer options
+    $wp_customize -> add_setting('_themename_footer_option', array(
+        'default' => 'dark',
+        'transport' => 'postMessage',
+        'sanitize_callback' => '_themename_sanitize_footer_option'
+    ));
+
+    $wp_customize -> add_control('_themename_footer_option', array(
+        'type' => 'select',
+        'label' => esc_html__( 'Footer Background Option', '_themename' ),
+        'choices' => array(
+            'light' => esc_html__( 'Light', '_themename' ),
+            'dark' => esc_html__( 'Dark', '_themename' )
+        ),
+        'section' => '_themename_footer_option'
     ));
 }
 add_action( 'customize_register', '_themename_customize_register' );
@@ -67,4 +85,13 @@ function _themename_sanitize_site_info($input) {
         'style' => array()
     ));
     return wp_kses( $input, $allowed );
+}
+
+// Creating Custom Sanitize option for Footer Option
+function _themename_sanitize_footer_option($input) {
+    $validOption = array('dark', 'light');
+    if(in_array($input, $validOption, true)) {
+        return $input;
+    }
+    return 'dark';
 }

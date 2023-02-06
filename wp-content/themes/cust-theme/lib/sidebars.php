@@ -17,7 +17,11 @@ add_action( 'widgets_init', '_themename_sidebar_widget' );
 // Footer Widget
 $footer_layout = '3,3,3,3';
 $footer_columns = explode(',', $footer_layout);
-$footer_bg = 'dark';
+// Manual Setting of Footer Background
+// $footer_bg = 'dark';
+
+// Fetching the Footer Background from the Customize Panel
+$footer_bg = _themename_sanitize_footer_option(get_theme_mod( '_themename_footer_option', 'dark ' )) ;
 $footer_widget_bg_color = '';
 if($footer_bg = 'light') {
     $footer_widget_bg_color = 'c-footer-widget--dark';
