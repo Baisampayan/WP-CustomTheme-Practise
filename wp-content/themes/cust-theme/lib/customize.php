@@ -7,6 +7,28 @@ function _themename_customize_register($wp_customize) {
     //     'sanitize_callback' => 'sanitize_text_field'
     // ));
 
+    // Selective Refresh with Ajax for header (Logo)
+    $wp_customize -> get_setting( 'blogname' ) -> transport = 'postMessage';
+
+    $wp_customize -> selective_refresh -> add_partial('blogname', array(
+        // 'setting' => array('blogname')
+        'selector' => 'c-header__blogname',
+        'container_inclusive' => false,
+        'render_callback' => function() {
+            bloginfo('name');
+        }
+    ));
+
+    // Selective Refresh with Ajax for Footer
+    $wp_customize -> selective_refresh -> add_partial('_themename_footer_partial', array(
+        'setting' => array('_themename_site_info'),
+        'selector' => 'c-site-info',
+        'container_inclusive' => true,
+        'render_callback' => function() {
+            get_template_part( 'template-parts/footer/copyright-footer' );
+        }
+    ));
+
     // Using default Custom Sanitization (Text + href)
     $wp_customize -> add_setting('_themename_site_info', array(
         'default' => '',
