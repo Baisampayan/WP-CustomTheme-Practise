@@ -21,7 +21,7 @@ function _themename_customize_register($wp_customize) {
 
     // Selective Refresh with Ajax for Footer Option
     $wp_customize -> selective_refresh -> add_partial('_themename_footer_partial', array(
-        'setting' => array('_themename_site_info', '_themename_footer_option'),
+        'setting' => array('_themename_footer_option', '_themename_footer_layout'),
         'selector' => '#footer',
         'container_inclusive' => false,
         'render_callback' => function() {
@@ -74,6 +74,20 @@ function _themename_customize_register($wp_customize) {
         ),
         'section' => '_themename_footer_option'
     ));
+
+    // Creating Footer Layout
+    $wp_customize -> add_setting('_themename_footer_layout', array(
+        'default' => '3,3,3,3',
+        'transport' => 'postMessage',
+        'sanitize_callback' => 'sanitize_text_field',
+        'validate_callback' => '_themename_validate_footer_layout'
+    ));
+
+    $wp_customize -> add_control('_themename_footer_layout', array(
+        'type' => 'textarea',
+        'label' => esc_html__( 'Footer Site Layout', '_themename' ),
+        'section' => '_themename_footer_option'
+    ));
 }
 add_action( 'customize_register', '_themename_customize_register' );
 
@@ -87,11 +101,19 @@ function _themename_sanitize_site_info($input) {
     return wp_kses( $input, $allowed );
 }
 
-// Creating Custom Sanitize option for Footer Option
+// Creating Custom Sanitize option for Footer Background Option
 function _themename_sanitize_footer_option($input) {
     $validOption = array('dark', 'light');
     if(in_array($input, $validOption, true)) {
         return $input;
     }
     return 'dark';
+}
+
+// Validating Footer Layout input for number only and sum not greater than 12
+function _themename_validate_footer_layout($validity, $value) {
+    if(!preg_match('/^([1-9]|1[012])(,([1-9]|1[012]))*$/', $value)) {
+        $validity -> add('invalid_footer_layout', esc_html__( 'Please Enter a Valid Input - "3,3,3,3" or "4,4,4" or "6,6" or "12"', '_themename' ));
+    }
+    return $validity;
 }

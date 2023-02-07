@@ -15,7 +15,9 @@ function _themename_sidebar_widget() {
 add_action( 'widgets_init', '_themename_sidebar_widget' );
 
 // Footer Widget
-$footer_layout = '3,3,3,3';
+$footer_layout = sanitize_text_field(get_theme_mod( '_themename_footer_layout', '3,3,3,3' ));
+// Removing any spaces
+$footer_layout = preg_replace('/\s+/', '', $footer_layout);
 $footer_columns = explode(',', $footer_layout);
 // Manual Setting of Footer Background
 // $footer_bg = 'dark';

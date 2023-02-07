@@ -1,7 +1,9 @@
 <?php
 
 // Footer Widget
-$footer_layout = '3,3,3,3';
+$footer_layout = sanitize_text_field(get_theme_mod( '_themename_footer_layout', '3,3,3,3' ));
+// Removing any spaces
+$footer_layout = preg_replace('/\s+/', '', $footer_layout);
 $footer_columns = explode(',', $footer_layout);
 $footer_bg = get_theme_mod( '_themename_footer_option', 'dark ' ) ;
 // If there is any active footer widget
