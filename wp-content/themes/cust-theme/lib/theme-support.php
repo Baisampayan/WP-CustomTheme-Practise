@@ -8,6 +8,14 @@ function _themename_theme_support () {
     ) );
     // Selective Refresh for Widget
     add_theme_support( 'customize-selective-refresh-widgets' );
+
+    // Option for Custom Logo
+    add_theme_support( 'custom-logo', array(
+        'height' => 150,
+        'width' => 600,
+        'flex-height' => true,
+        'flex-width' => true
+    ) );
 }
 
 add_action( 'after_setup_theme', '_themename_theme_support' );
