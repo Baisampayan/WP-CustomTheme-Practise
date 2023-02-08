@@ -21,7 +21,7 @@ function _themename_customize_register($wp_customize) {
 
     // Selective Refresh with Ajax for Footer Option
     $wp_customize -> selective_refresh -> add_partial('_themename_footer_partial', array(
-        'setting' => array('_themename_footer_option', '_themename_footer_layout'),
+        'settings' => array('_themename_footer_option', '_themename_footer_layout'),
         'selector' => '#footer',
         'container_inclusive' => false,
         'render_callback' => function() {
@@ -88,6 +88,24 @@ function _themename_customize_register($wp_customize) {
         'label' => esc_html__( 'Footer Site Layout', '_themename' ),
         'section' => '_themename_footer_option'
     ));
+
+    // For Color Picker
+    $wp_customize -> add_section('_themename_general_option', array(
+        'title' => esc_html__( 'Theme General Option', '_themename' ),
+        'description' => esc_html__( 'This section is to change General Option of the website', '_themename' ),
+        // Arranging the position 
+        //'priority' => 40
+    ));
+
+    $wp_customize->add_setting('_themename_accent_color', array(
+        'default' => '#9600AA',
+        'sanitize_callback' => 'sanitize_hex_color'
+    ));
+
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, '_themename_accent_color', array(
+        'label' => __( 'Accent Color', '_themename' ),
+        'section' => '_themename_general_option'
+    )));
 }
 add_action( 'customize_register', '_themename_customize_register' );
 
