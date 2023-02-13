@@ -89,7 +89,7 @@ function _themename_customize_register($wp_customize) {
         'section' => '_themename_footer_option'
     ));
 
-    // For Color Picker
+    // For General Setting
     $wp_customize -> add_section('_themename_general_option', array(
         'title' => esc_html__( 'Theme General Option', '_themename' ),
         'description' => esc_html__( 'This section is to change General Option of the website', '_themename' ),
@@ -97,6 +97,7 @@ function _themename_customize_register($wp_customize) {
         //'priority' => 40
     ));
 
+    // For Color Picker
     $wp_customize->add_setting('_themename_accent_color', array(
         'default' => '#9600AA',
         'transport' => 'postMessage',
