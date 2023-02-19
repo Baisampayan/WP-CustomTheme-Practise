@@ -12,4 +12,5 @@
         <?php the_excerpt(); ?>
     </div>
     <?php _themename_post_ReadMore_Link();?>
+    <?php echo _themename_delete_post(); ?>
 </article>
