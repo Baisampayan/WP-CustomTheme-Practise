@@ -14,7 +14,7 @@ function _themename_handle_delete_post() {
             return;
         }
         $post_id = isset($_GET['post']) ? $_GET['post'] : null;
-        $post = get_post( (int) $post_id );
+        $post = get_post((int) $post_id );
         if(empty($post)) {
             return;
         }

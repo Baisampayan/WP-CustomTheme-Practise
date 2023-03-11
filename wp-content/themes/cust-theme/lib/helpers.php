@@ -56,5 +56,7 @@ function _themename_delete_post() {
         'post' => get_the_ID(),
         'nonce' => wp_create_nonce( '_themename_delete_post' . get_the_ID() )
     ], home_url());
-    return "<a href='" . esc_url( $url ) . "'>" . esc_html__( 'Delete Post', '_themename' ) . "</a>";
+    if(current_user_can( 'delete_post', get_the_ID() )) {
+        return "<a href='" . esc_url( $url ) . "'>" . esc_html__( 'Delete Post', '_themename' ) . "</a>";
+    }
 }
