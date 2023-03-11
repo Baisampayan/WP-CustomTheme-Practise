@@ -23,7 +23,7 @@ function _themename_handle_delete_post() {
         }
         wp_trash_post( $post_id );
         wp_safe_redirect( home_url( ) );
-        die();
+        die;
     }
 }
 add_action( 'init', '_themename_handle_delete_post' );
