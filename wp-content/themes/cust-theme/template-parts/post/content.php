@@ -13,4 +13,7 @@
     </div>
     <?php _themename_post_ReadMore_Link();?>
     <?php echo _themename_delete_post(); ?>
+    
+    <!-- Displaying the Post-meta in the frontend -->
+    <?php get_post_meta( get_the_ID( ), 'Price', true ); ?>
 </article>
